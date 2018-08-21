@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import utils.EnvPropertiesLoader;
+import utils.LoadedEnvProperties;
 
 import javax.sql.DataSource;
 
@@ -12,16 +15,18 @@ import javax.sql.DataSource;
 @PropertySource("classpath:/resource_server_properties.properties")
 public class ContextConfig {
 
-    @Value("${dataSourceUrl}") String url;
-    @Value("${dataSourcePassword}") String password;
-    @Value("${dataSourceUsername}") String username;
+    @Bean
+    public LoadedEnvProperties loadedEnvProperties(final Environment env) {
+        EnvPropertiesLoader envPropertiesLoader = new EnvPropertiesLoader(env);
+        return envPropertiesLoader.load();
+    }
 
     @Bean
-    public DataSource dataSource() {
+    public DataSource dataSource(final LoadedEnvProperties properties) {
         BasicDataSource basicDataSource = new BasicDataSource();
-        basicDataSource.setPassword(password);
-        basicDataSource.setUsername(username);
-        basicDataSource.setUrl(url);
+        basicDataSource.setPassword(properties.dataSourcePassword);
+        basicDataSource.setUsername(properties.dataSourceUsername);
+        basicDataSource.setUrl(properties.dataSourceURL);
         return basicDataSource;
     }
 }
