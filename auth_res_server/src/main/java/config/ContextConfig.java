@@ -13,8 +13,8 @@ import javax.sql.DataSource;
 public class ContextConfig {
 
     @Value("${dataSourceUrl}") String url;
-    @Value("${dataSourcePassword") String password;
-    @Value("${dataSourceUsername") String username;
+    @Value("${dataSourcePassword}") String password;
+    @Value("${dataSourceUsername}") String username;
 
     @Bean
     public DataSource dataSource() {
