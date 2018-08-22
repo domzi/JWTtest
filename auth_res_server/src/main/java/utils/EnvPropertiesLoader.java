@@ -13,7 +13,7 @@ public class EnvPropertiesLoader {
     public LoadedEnvProperties load() {
 
         return new LoadedEnvProperties(
-                env.getProperty("dataSourceURL"),
+                env.getProperty("dataSourceUrl"),
                 env.getProperty("dataSourceUsername"),
                 env.getProperty("dataSourcePassword"));
     }
