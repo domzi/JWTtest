@@ -5,20 +5,15 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.sql.DataSource;
-
 import static org.hamcrest.CoreMatchers.is;
 
 @TestPropertySource("classpath:/resource_server_properties.properties")
-@ContextConfiguration(classes = ContextConfig.class)
+@ContextConfiguration(classes = DataSourceConfig.class)
 @RunWith(SpringRunner.class)
 public class ConfigTest {
 
